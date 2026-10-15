@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fukuoka &amp; Kyushu 2026 🇯🇵</title>
+<style>
+:root{--nv:#1a2e4a;--cy:#00b4d8;--tl:#0077a8;--rd:#e63946;--gn:#2d9e6b;--am:#f4a261;--bg:#f0f7ff;--card:#fff;--muted:#64748b;--border:#e0f2fe}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--nv);min-height:100vh}
+header{background:linear-gradient(135deg,var(--nv) 0%,#2a4a6a 60%,var(--tl) 100%);color:#fff;padding:18px 16px 14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+header h1{font-size:1.15rem;font-weight:700;letter-spacing:-.3px}
+header p{font-size:.72rem;opacity:.8;margin-top:2px}
+.tabs{display:flex;gap:0;overflow-x:auto;background:var(--nv);scrollbar-width:none;border-bottom:2px solid var(--cy)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:8px 14px;font-size:.72rem;font-weight:600;color:rgba(255,255,255,.65);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .15s}
+.tab.active,.tab:hover{color:#fff;border-bottom-color:var(--cy);background:rgba(255,255,255,.07)}
+.pane{display:none;padding:12px 12px 80px;max-width:600px;margin:0 auto}
+.pane.active{display:block}
+.card{background:var(--card);border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,50,100,.08)}
+.card h3{font-size:.82rem;font-weight:700;color:var(--tl);margin-bottom:6px}
+.info-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px;font-size:.75rem}
+.info-row .lbl{color:var(--muted);flex-shrink:0;width:64px;font-size:.68rem;padding-top:1px}
+.info-row .val{color:var(--nv);font-weight:500;flex:1;line-height:1.4}
+.dh{display:flex;align-items:center;gap:8px;background:linear-gradient(90deg,var(--nv),#2a4a6a);color:#fff;padding:9px 12px;border-radius:10px 10px 0 0;margin-top:14px;font-size:.77rem;font-weight:700}
+.dh .dh-date{font-size:.65rem;opacity:.7;margin-left:auto;flex-shrink:0}
+.dh-restore{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.5);font-size:.65rem;margin-left:6px;padding:2px 5px;border-radius:4px}
+.dh-restore:hover{color:#fff;background:rgba(255,255,255,.15)}
+.db{background:var(--card);border-radius:0 0 10px 10px;margin-bottom:2px;overflow:hidden;border:1px solid var(--border);border-top:none}
+.dr{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-bottom:1px solid #f1f5f9}
+.dr:last-child{border-bottom:none}
+.dt{font-size:.65rem;color:var(--cy);font-weight:700;flex-shrink:0;width:38px;padding-top:1px}
+.dr>div:not(.dt):not(.dr-rm){flex:1;font-size:.75rem;color:var(--nv);line-height:1.4;font-weight:500}
+.dr-sub{font-size:.67rem;color:var(--muted);font-weight:400;margin-top:1px}
+.dr-rm{background:none;border:none;cursor:pointer;color:#cbd5e1;font-size:.88rem;padding:0 0 0 4px;line-height:1;margin-left:auto;flex-shrink:0;padding-top:2px}
+.dr-rm:hover{color:#ef4444}
+.dp-wrap{background:#f8fafc;border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;padding:8px;margin-bottom:12px}
+.dp-hd{font-size:.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.dp-row{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;background:#fff;border:1px solid var(--border);border-radius:7px;margin-bottom:5px}
+.dp-row-info{flex:1;font-size:.77rem;color:var(--nv);font-weight:600;line-height:1.3}
+.dp-row-meta{font-weight:400;color:var(--muted);font-size:.68rem}
+.dp-row-rm{background:none;border:none;cursor:pointer;color:#94a3b8;font-size:1rem;padding:0 2px 0 8px;line-height:1;flex-shrink:0}
+.dp-none{font-size:.72rem;color:#94a3b8;padding:4px 2px;font-style:italic}
+.dp-add{display:block;width:100%;margin-top:6px;padding:7px;background:linear-gradient(90deg,var(--tl),var(--cy));color:#fff;border:none;border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer;text-align:center}
+.pk-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:flex-end;justify-content:center}
+.pk-ov.open{display:flex}
+.pk-box{background:#fff;width:100%;max-width:480px;border-radius:18px 18px 0 0;max-height:80vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0)}
+.pk-hd{padding:14px 16px 10px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;gap:8px}
+.pk-hd h3{font-size:.88rem;font-weight:700;color:var(--nv);flex:1}
+.pk-close{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--muted)}
+.pk-search{margin:8px 14px;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:.8rem;width:calc(100% - 28px);outline:none}
+.pk-search:focus{border-color:var(--cy)}
+.pk-list{overflow-y:auto;flex:1;padding:4px 0}
+.pk-item{display:flex;align-items:center;gap:10px;padding:9px 16px;cursor:pointer;border-bottom:1px solid #f8fafc}
+.pk-item:hover{background:#f0f9ff}
+.pk-icon{font-size:1.3rem;width:28px;text-align:center}
+.pk-info{flex:1}
+.pk-name{font-size:.8rem;font-weight:600;color:var(--nv)}
+.pk-meta{font-size:.68rem;color:var(--muted)}
+.pk-filter{display:flex;gap:6px;padding:6px 14px;overflow-x:auto;scrollbar-width:none}
+.pk-filter::-webkit-scrollbar{display:none}
+.pk-fchip{flex-shrink:0;padding:4px 11px;border-radius:12px;font-size:.68rem;font-weight:600;background:#f1f5f9;color:var(--muted);border:none;cursor:pointer}
+.pk-fchip.active{background:var(--tl);color:#fff}
+.btbl{width:100%;border-collapse:collapse;font-size:.75rem;margin-top:8px}
+.btbl th{background:var(--nv);color:#fff;padding:7px 8px;text-align:left;font-size:.68rem}
+.btbl td{padding:7px 8px;border-bottom:1px solid var(--border)}
+.btbl tr:last-child td{border-bottom:none;font-weight:700;background:#f8fafc}
+.btbl .num{text-align:right}
+.budget-input{width:100%;border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:.78rem;background:#fff}
+.spc-form{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.spc-form input,.spc-form select,.spc-form textarea{border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:.78rem;outline:none}
+.spc-form input:focus,.spc-form select:focus,.spc-form textarea:focus{border-color:var(--cy)}
+.spc-form textarea{resize:vertical;min-height:52px}
+.spc-btn{background:var(--tl);color:#fff;border:none;border-radius:8px;padding:9px;font-size:.8rem;font-weight:700;cursor:pointer;width:100%}
+.spc-row{background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--border);display:flex;align-items:flex-start;gap:10px}
+.spc-cat{font-size:1.4rem;flex-shrink:0}
+.spc-inf{flex:1}
+.spc-nm{font-size:.8rem;font-weight:700;color:var(--nv)}
+.spc-meta{font-size:.67rem;color:var(--muted);margin-top:2px}
+.spc-note{font-size:.72rem;color:var(--nv);margin-top:4px;line-height:1.4}
+.spc-rm{background:none;border:none;cursor:pointer;color:#cbd5e1;font-size:.9rem;flex-shrink:0;padding-top:2px}
+.spc-rm:hover{color:#ef4444}
+.spc-maps{color:var(--tl);font-size:.68rem;text-decoration:none;margin-top:3px;display:inline-block}
+.hl-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.hl-card{background:var(--card);border-radius:10px;padding:10px;border:1px solid var(--border)}
+.hl-icon{font-size:1.5rem;margin-bottom:4px}
+.hl-name{font-size:.75rem;font-weight:700;color:var(--nv);line-height:1.2}
+.hl-sub{font-size:.65rem;color:var(--muted);margin-top:2px}
+.hl-tip{font-size:.7rem;color:var(--tl);font-style:italic;margin-bottom:12px;padding:8px 10px;background:#e0f2fe;border-radius:8px;line-height:1.4}
+.lg-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f1f5f9}
+.lg-item:last-child{border-bottom:none}
+.lg-icon{font-size:1.3rem;flex-shrink:0;width:28px;text-align:center}
+.lg-info{flex:1}
+.lg-title{font-size:.78rem;font-weight:700;color:var(--nv)}
+.lg-desc{font-size:.7rem;color:var(--muted);margin-top:2px;line-height:1.4}
+.sec-hd{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:14px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--border)}
+.flight-banner{background:linear-gradient(90deg,#0a1628,var(--nv));color:#fff;border-radius:10px;padding:12px 14px;margin-bottom:12px;display:flex;gap:12px;align-items:center}
+.flight-banner .fb-icon{font-size:2rem}
+.flight-banner .fb-info{flex:1}
+.fb-route{font-size:.88rem;font-weight:700;letter-spacing:.3px}
+.fb-details{font-size:.67rem;opacity:.75;margin-top:3px;line-height:1.5}
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
+.stat-box{background:#fff;border-radius:8px;padding:8px;text-align:center;border:1px solid var(--border)}
+.stat-num{font-size:1.1rem;font-weight:800;color:var(--tl)}
+.stat-lbl{font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-top:1px}
+.spin-btn{background:linear-gradient(135deg,var(--rd),#c1121f);color:#fff;border:none;border-radius:12px;padding:14px;font-size:.9rem;font-weight:700;cursor:pointer;width:100%;margin-bottom:12px}
+.spin-result{background:#fff;border-radius:12px;padding:16px;text-align:center;border:2px solid var(--cy);display:none}
+.spin-result.show{display:block}
+.spin-result .sr-icon{font-size:2.5rem}
+.spin-result .sr-name{font-size:1rem;font-weight:700;color:var(--nv);margin-top:8px}
+.spin-result .sr-area{font-size:.75rem;color:var(--muted);margin-top:4px}
+</style>
+</head>
+<body>
+<header>
+  <h1>🇯🇵 Fukuoka &amp; Kyushu 2026</h1>
+  <p>Bing &amp; Joy · Dec 3–15 · 13 Days · Road Trip</p>
+</header>
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('overview')">📋 Overview</div>
+  <div class="tab" onclick="switchTab('fukuoka')">🏙️ Fukuoka</div>
+  <div class="tab" onclick="switchTab('kagoshima')">🌋 Kagoshima</div>
+  <div class="tab" onclick="switchTab('kirishima')">⛩️ Kirishima</div>
+  <div class="tab" onclick="switchTab('miyazaki')">🏖️ Miyazaki</div>
+  <div class="tab" onclick="switchTab('beppu')">♨️ Beppu &amp; Yufuin</div>
+  <div class="tab" onclick="switchTab('kumamoto')">🏯 Kumamoto</div>
+  <div class="tab" onclick="switchTab('places')">📍 Our Places</div>
+  <div class="tab" onclick="switchTab('budget')">💴 Budget</div>
+  <div class="tab" onclick="switchTab('logistics')">✈️ Logistics</div>
+  <div class="tab" onclick="switchTab('random')">🎲 Spin</div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="pane active" id="pane-overview">
+  <div class="flight-banner">
+    <div class="fb-icon">✈️</div>
+    <div class="fb-info">
+      <div class="fb-route">SIN → FUK · FUK → SIN</div>
+      <div class="fb-details">CX513 (via HKG) · Depart SIN 01:25 · Arrive FUK 14:15<br>Outbound: CX513 Depart FUK 13:15 · Ref: E3C6PQ</div>
+    </div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-box"><div class="stat-num">13</div><div class="stat-lbl">Days</div></div>
+    <div class="stat-box"><div class="stat-num">7</div><div class="stat-lbl">Cities</div></div>
+    <div class="stat-box"><div class="stat-num">12</div><div class="stat-lbl">Nights</div></div>
+    <div class="stat-box"><div class="stat-num">1</div><div class="stat-lbl">Road Trip</div></div>
+  </div>
+
+  <div class="dh"><span>Day 1</span><span style="font-size:.85rem">🛬 Arrive Fukuoka</span><button class="dh-restore" onclick="restoreDay('dec03')">↩ restore</button><span class="dh-date">Thu Dec 3</span></div>
+  <div class="db">
+    <div class="dr" id="dr-dec03-0"><div class="dt">01:25</div><div>Depart Singapore (SIN) on CX513<div class="dr-sub">Via HKG transit · Booking ref E3C6PQ</div></div><button class="dr-rm" onclick="hideRow('dr-dec03-0')">✕</button></div>
+    <div class="dr" id="dr-dec03-1"><div class="dt">14:15</div><div>Arrive Fukuoka (FUK) ✈️<div class="dr-sub">Clear immigration, collect bags, get IC card at airport</div></div><button class="dr-rm" onclick="hideRow('dr-dec03-1')">✕</button></div>
+    <div class="dr" id="dr-dec03-2"><div class="dt">15:30</div><div>Check in — Candeo Hotel Fukuoka<div class="dr-sub">Tenjin / Hakata area · drop bags, freshen up</div></div><button class="dr-rm" onclick="hideRow('dr-dec03-2')">✕</button></div>
+    <div class="dr" id="dr-dec03-3"><div class="dt">16:30</div><div>Canal City Hakata — stroll &amp; explore<div class="dr-sub">Waterfall atrium, shops, evening atmosphere</div></div><button class="dr-rm" onclick="hideRow('dr-dec03-3')">✕</button></div>
+    <div class="dr" id="dr-dec03-4"><div class="dt">18:30</div><div>🏮 Nakasu Yatai — riverside food stall dinner<div class="dr-sub">Ramen, oden, yakitori at open-air yatai under lanterns</div></div><button class="dr-rm" onclick="hideRow('dr-dec03-4')">✕</button></div>
+    <div class="dr" id="dr-dec03-5"><div class="dt">21:00</div><div>Evening walk Tenjin / Nishitetsu area</div><button class="dr-rm" onclick="hideRow('dr-dec03-5')">✕</button></div>
+  </div>
+  <div class="dp-wrap"><div class="dp-hd">My Plan — Day 1</div><div id="dp-dec03"></div></div>
+
+  <div class="dh"><span>Day 2</span><span style="font-size:.85rem">☕ Fukuoka + Yame Day Trip</span><button class="dh-restore" onclick="restoreDay('dec04')">↩ restore</button><span class="dh-date">Fri Dec 4</span></div>
+  <div class="db">
+    <div class="dr" id="dr-dec04-0"><div class="dt">08:00</div><div>☕ FUK Coffee — flagship Fukuoka café<div class="dr-sub">Signature filter coffee, beloved local institution</div></div><button class="dr-rm" onclick="hideRow('dr-dec04-0')">✕</button></div>
+    <div class="dr" id="dr-dec04-1"><div class="dt">09:30</div><div>Drive to Yame (星野村 Hoshino Village) ~1hr<div class="dr-sub">Japan's finest gyokuro green tea region</div></div><button class="dr-rm" onclick="hideRow('dr-dec04-1')">✕</button></div>
+    <div class="dr" id="dr-dec04-2"><div class="dt">10:30</div><div>Yame — Hoshino Tea Garden &amp; tea ceremony<div class="dr-sub">Pick up gyokuro tea leaves as gifts</div></div><button class="dr-rm" onclick="hideRow('dr-dec04-2')">✕</button></div>
+    <div class="dr" id="dr-dec04-3"><div class="dt">12:30</div><div>Lunch in Yame — local soba / tofu cuisine</div><button class="dr-rm" onclick="hideRow('dr-dec04-3')">✕</button></div>
+    <div class="dr" id="dr-dec04-4"><div class="dt">14:00</div><div>LaLaport Fukuoka — 🤖 Gundam RX-78 Statue<div class="dr-sub">Life-size Gundam, free outdoor display</div></div><button class="dr-rm" onclick="hideRow('dr-dec04-4')">✕</button></div>
+    <div class="dr" id="dr-dec04-5"><div class="dt">16:30</div><div>🏃 Run 1 — Ohori Park lake loop (~2km)<div class="dr-sub">Golden hour run around the beautiful central lake</div></div><button class="dr-rm" onclick="hideRow('dr-dec04-5')">✕</button></div>
+    <div class="dr" id="dr-dec04-6"><div class="dt">18:30</div><div>🍜 Tsukemen dinner — Hakata area<div class="dr-sub">Thick rich dipping broth noodles</div></div><button class="dr-rm" onclick="hideRow('dr-dec04-6')">✕</button></div>
+  </div>
+  <div class="dp-wrap"><div class="dp-hd">My Plan — Day 2</div><div id="dp-dec04"></div></div>
+
+  <div class="dh"><span>Day 3</span><span style="font-size:.85rem">🚄 Shinkansen → Kagoshima</span><button class="dh-restore" onclick="restoreDay('dec05')">↩ restore</button><span class="dh-date">Sat Dec 5</span></div>
+  <div class="db">
+    <div class="dr" id="dr-dec05-0"><div class="dt">08:30</div><div>Dazaifu Tenmangu Shrine (optional)<div class="dr-sub">~30min from Fukuoka; flying plum motif</div></div><button class="dr-rm" onclick="hideRow('dr-dec05-0')">✕</button></div>
+    <div class="dr" id="dr-dec05-1"><div class="dt">10:30</div><div>🚄 Hakata → Kagoshima-Chuo (Shinkansen Sakura)<div class="dr-sub">FREE via Klook Kyushu Recovery pass · ~80 min · up to ¥11,420pp</div></div><button class="dr-rm" onclick="hideRow('dr-dec05-1')">✕</button></div>
+    <div class="dr" id="dr-dec05-2"><div class="dt">12:00</div><div>Check in — Fav Lux Kagoshima · pick up car rental<div class="dr-sub">Car rental starts here for the road trip ahead</div></div><button class="dr-rm" onclick="hideRow('dr-dec05-2')">✕</button></div>
+    <div class="dr" id="dr-dec05-3"><div class="dt">13:30</div><div>🌋 Sakurajima — ferry across (15 min) &amp; explore<div class="dr-sub">Active volcano island; drive the perimeter road</div></div><button class="dr-rm" onclick="hideRow('dr-dec05-3')">✕</button></div>
+    <div class="dr" id="dr-dec05-4"><div class="dt">16:00</div><div>Tenmonkan shopping arcade — stroll &amp; snacks<div class="dr-sub">Shirokuma kakigori, karukan wagashi sweets</div></div><button class="dr-rm" onclick="hideRow('dr-dec05-4')">✕</button></div>
+    <div class="dr" id="dr-dec05-5"><div class="dt">18:30</div><div>🍣 Mawaru Kaiten Sushi — Kagoshima<div class="dr-sub">Local conveyor belt sushi; Aji &amp; Kinmedai catches</div></div><button class="dr-rm" onclick="hideRow('dr-dec05-5')">✕</button></div>
+  </div>
+  <div class="dp-wrap"><div class="dp-hd">My Plan — Day 3</div><div id="dp-dec05"></div></div>
+
+  <div class="dh"><span>Day 4</span><span style="font-size:.85rem">🌊 Kagoshima South</span><button class="dh-restore" onclick="restoreDay('dec06')">↩ restore</button><span class="dh-date">Sun Dec 6</span></div>
+  <div class="db">
+    <div class="dr" id="dr-dec06-0"><div class="dt">08:30</div><div>Drive south to Lake Ikeda (池田湖) ~1.5hr<div class="dr-sub">Kagoshima's largest crater lake</div></div><button class="dr-rm" onclick="hideRow('dr-dec06-0')">✕</button></div>
+    <div class="dr" id="dr-dec06-1"><div class="dt">10:00</div><div>🐍 Lake Ikeda — spot the giant eels (Ossie)<div class="dr-sub">Legendary oversized eels &amp; lake views toward Kaimondake</div></div><button class="dr-rm" onclick="hideRow('dr-dec06-1')">✕</button></div>
+    <div class="dr" id="dr-dec06-2"><div class="dt">11:30</div><div>🍠 Ibusuki — sweet potato shopping &amp; ice cream<div class="dr-sub">Purple sweet potato ice cream; buy chips &amp; gifts</div></div><button class="dr-rm" onclick="hideRow('dr-dec06-2')">✕</button></div>
+    <div class="dr" id="dr-dec06-3"><div class="dt">13:00</div><div>Drive north — lunch at local teishoku spot</div><button class="dr-rm" onclick="hideRow('dr-dec06-3')">✕</button></div>
+    <div class="dr" id="dr-dec06-4"><div class="dt">14:30</div><div>Sengan-en (仙巌園) — Shimadzu clan garden<div class="dr-sub">UNESCO; ocean &amp; Sakurajima backdrop</div></div><button class="dr-rm" onclick="hideRow('dr-dec06-4')">✕</button></div>
+    <div class="dr" id="dr-dec06-5"><div class="dt">16:30</div><div>Shiroyama Observatory — sunset panorama<div class="dr-sub">City + Sakurajima + Kinko Bay view at dusk</div></div><button class="dr-rm" onclick="hideRow('dr-dec06-5')">✕</button></div>
+    <div class="dr" id="dr-dec06-6"><div class="dt">18:00</div><div>🏃 Run 2 — Kagoshima waterfront / Dolphin Port<div class="dr-sub">5km flat coastal path; Sakurajima lit at night</div></div><button class="dr-rm" onclick="hideRow('dr-dec06-6')">✕</button></div>
+    <div class="dr" id="dr-dec06-7"><div class="dt">20:00</div><div>🐷 Kurobuta black pork dinner — Tenmonkan<div class="dr-sub">Kagoshima's signature shabu-shabu or tonkatsu</div></div><button class="dr-rm" onclick="hideRow('dr-dec06-7')">✕</button></div>
+  </div>
+  <div class="dp-wrap"><div class="dp-hd">My Plan — Day 4</div><div id="dp-dec06"></div></div>
+
+  <div class="dh"><span>Day 5</span><span style="font-size:.85rem">⛩️ Kirishima Highlands</span><button class="dh-restore" onclick="restoreDay('dec07')">↩ restore</button><span class="dh-date">Mon Dec 7</span></div>
+  <div class="db">
+    <div class="dr" id="dr-dec07-0"><div class="dt">09:00</div><div>Drive to Kirishima (~1.5hr north of Kagoshima)</div><button class="dr-rm" onclick="hideRow('dr-dec07-0')">✕</button></div>
+    <div class="dr" id="dr-dec07-1"><div class="dt">10:30</div><div>⛩️ Kirishima Jingu — ancient volcanic shrine<div class="dr-sub">One of Kyushu's most sacred shrines; cedar forest</div></div><button class="dr-rm" onclick="hideRow('dr-dec07-1')">✕</button></div>
+    <div class="dr" id="dr-dec07-2"><div class="dt">12:00</div><div>🥾 Takachiho-gawara — Amaterasu crater hike<div class="dr-sub">Mythological birthplace of Japan; ~1.5hr trail round trip</div></div><button class="dr-rm" onclick="hideRow('dr-dec07-2')">✕</button></div>
+    <div class="dr" id="dr-dec07-3"><div class="dt">14:00</div><div>Lunch at highland teahouse — venison or boar dishes</div><button class="dr-rm" onclick="hideRow('dr-dec07-3')">✕</button></div>
+    <div class="dr" id="dr-dec07-4"><div class="dt">15:00</div><div>Ebino Kogen — coloured volcanic crater lakes<div class="dr-sub">Walk the emerald &amp; turquoise lake loop (45 min)</div></div><button class="dr-rm" onclick="hideRow('dr-dec07-4')">✕</button></div>
+    <div class="dr" id="dr-dec07-5"><div class="dt">17:00</div><div>🏨 Check in — Hoshinoya Kirishima<div class="dr-sub">1 night · indoor &amp; outdoor hot spring baths · kaiseki dinner</div></div><button class="dr-rm" onclick="hideRow('dr-dec07-5')">✕</button></div>
+    <div class="dr" id="dr-dec07-6"><div class="dt">18:30</div><div>♨️ Kaiseki dinner at ryokan &amp; long onsen soak</div><button class="dr-rm" onclick="hideRow('dr-dec07-6')">✕</button></div>
+  </div>
+  <div class="dp-wrap"><div class="dp-hd">My Plan — Day 5</div><div id="dp-dec07"></div></div>
+
+  <div class="dh"><span>Day 6</span><span style="font-size:.85rem">🔥 Miyazaki + BBQ Night</span><button class="dh-restore" onclick="restoreDay('dec08')">↩ restore</button><span class="dh-date">Tue Dec 8</span></div>
+  <div class="db">
+    <div class="dr" id="dr-dec08-0"><div class="dt">07:00</div><div>♨️ Early morning onsen soak — ryokan</div><button class="dr-rm" onclick="hideRow('dr-dec08-0')">✕</button></div>
+    <div class="dr" id="dr-dec08-1"><div class="dt">08:30</div><div>Ryokan breakfast &amp; check out</div><button class="dr-rm" onclick="hideRow('dr-dec08-1')">✕</button></div>
+    <div class="dr" id="dr-dec08-2"><div class="dt">10:00</div><div>Drive to Miyazaki ~2hr (via Route 223)<div class="dr-sub">Scenic road through Kirishima mountains</div></div><button class="dr-rm" onclick="hideRow('dr-dec08-2')">✕</button></div>
+    <div class="dr" id="dr-dec08-3"><div class="dt">12:00</div><div>Heiwadai Park — Haniwa Garden (埴輪)<div class="dr-sub">Quirky terracotta figures in a wooded park; free</div></div><button class="dr-rm" onclick="hideRow('dr-dec08-3')">✕</button></div>
+    <div class="dr" id="dr-dec08-4"><div class="dt">13:30</div><div>🍗 Lunch — Ogura Honten<div class="dr-sub">The original Chicken Nanban restaurant; Miyazaki's most famous lunch stop since 1956</div></div><button class="dr-rm" onclick="hideRow('dr-dec08-4')">✕</button></div>
+    <div class="dr" id="dr-dec08-5"><div class="dt">15:00</div><div>🏕️ Check in — 1NLDK Aoshima, Miyazaki<div class="dr-sub">Shipping container accommodation · confirm BBQ wagyu package</div></div><button class="dr-rm" onclick="hideRow('dr-dec08-5')">✕</button></div>
+    <div class="dr" id="dr-dec08-6"><div class="dt">18:30</div><div>🔥 BBQ dinner at container hotel — Miyazaki Wagyu<div class="dr-sub">Outdoor grill; premium A4/A5 Miyazaki beef</div></div><button class="dr-rm" onclick="hideRow('dr-dec08-6')">✕</button></div>
+    <div class="dr" id="dr-dec08-7"><div class="dt">21:00</div><div>Bonfire / rooftop drinks at the hotel</div><button class="dr-rm" onclick="hideRow('dr-dec08-7')">✕</button></div>
+  </div>
+  <div class="dp-wrap"><div class="dp-hd">My Plan — Day 6</div><div id="dp-dec08"></div></div>
+
+  <div class="dh"><span>Day 7</span><span style="font-size:.85rem">🏖️ Nichinan Coast Drive</span><button class="dh-restore" onclick="restoreDay('dec09')">↩ restore</button><span class="dh-date">Wed Dec 9</span></div>
+  <div class="db">
+    <div class="dr" id="dr-dec09-0"><div class="dt">08:30</div><div>Drive south — Nichinan Coast (Route 220)<div class="dr-sub">Stunning cliffs &amp; sea views</div></div><button class="dr-rm" onclick="hideRow('dr-dec09-0')">✕</button></div>
+    <div class="dr" id="dr-dec09-1"><div class="dt">09:30</div><div>🏝️ Aoshima Island &amp; Jungle Shrine<div class="dr-sub">Walk across the "devil's washboard" rock causeway</div></div><button class="dr-rm" onclick="hideRow('dr-dec09-1')">✕</button></div>
+    <div class="dr" id="dr-dec09-2"><div class="dt">11:00</div><div>⛩️ Udo Jingu — cliff-face sea shrine<div class="dr-sub">Inside a sea cave; throw pottery balls for luck</div></div><button class="dr-rm" onclick="hideRow('dr-dec09-2')">✕</button></div>
+    <div class="dr" id="dr-dec09-3"><div class="dt">12:30</div><div>Sun Messe Nichinan — Moai statues replica<div class="dr-sub">7 Easter Island moai, oceanfront setting</div></div><button class="dr-rm" onclick="hideRow('dr-dec09-3')">✕</button></div>
+    <div class="dr" id="dr-dec09-4"><div class="dt">14:00</div><div>🐟 Lunch — Nichinan Suisan<div class="dr-sub">Fresh local seafood; catch of the day from Nichinan coast</div></div><button class="dr-rm" onclick="hideRow('dr-dec09-4')">✕</button></div>
+    <div class="dr" id="dr-dec09-5"><div class="dt">15:00</div><div>🐴 Cape Toi (都井岬) — wild Misaki horses<div class="dr-sub">Free-roaming ancient breed on windswept cape</div></div><button class="dr-rm" onclick="hideRow('dr-dec09-5')">✕</button></div>
+    <div class="dr" id="dr-dec09-6"><div class="dt">18:30</div><div>🥩 Dinner — Miyachiku Beef Teppanyaki<div class="dr-sub">Premium Miyazaki wagyu A5 teppanyaki; one of the best in the prefecture</div></div><button class="dr-rm" onclick="hideRow('dr-dec09-6')">✕</button></div>
+  </div>
+  <div class="dp-wrap"><div class="dp-hd">My Plan — Day 7</div><div id="dp-dec09"></div></div>
+
+  <div class="dh"><span>Day 8</span><span style="font-size:.85rem">🚣 Takachiho + Beppu</span><button class="dh-restore" onclick="restoreDay('dec10')">↩ restore</button><span class="dh-date">Thu Dec 10</span></div>
+  <div class="db">
+    <div class="dr" id="dr-dec10-0"><div class="dt">07:30</div><div>Drive north toward Takachiho Gorge (~2.5hr)</div><button class="dr-rm" onclick="hideRow('dr-dec10-0')">✕</button></div>
+    <div class="dr" id="dr-dec10-1"><div class="dt">10:00</div><div>🚣 Takachiho Gorge — rowboat through lava columns<div class="dr-sub">Manai Falls from the water; mythological landscape</div></div><button class="dr-rm" onclick="hideRow('dr-dec10-1')">✕</button></div>
+    <div class="dr" id="dr-dec10-2"><div class="dt">12:00</div><div>Takachiho Shrine visit &amp; local lunch</div><button class="dr-rm" onclick="hideRow('dr-dec10-2')">✕</button></div>
+    <div class="dr" id="dr-dec10-3"><div class="dt">13:30</div><div>Drive to Beppu (~2hr east through Oita mountains)</div><button class="dr-rm" onclick="hideRow('dr-dec10-3')">✕</button></div>
+    <div class="dr" id="dr-dec10-4"><div class="dt">15:30</div><div>Beppu Kannawa district — jigoku-mushi steam food<div class="dr-sub">🍠 Steam corn, egg, sweet potato in volcanic vents</div></div><button class="dr-rm" onclick="hideRow('dr-dec10-4')">✕</button></div>
+    <div class="dr" id="dr-dec10-5"><div class="dt">17:00</div><div>Check in — Mure Beppu</div><button class="dr-rm" onclick="hideRow('dr-dec10-5')">✕</button></div>
+    <div class="dr" id="dr-dec10-6"><div class="dt">18:30</div><div>♨️ Hyotan Onsen or Kannawa communal bath<div class="dr-sub">Award-winning historic bathhouse</div></div><button class="dr-rm" onclick="hideRow('dr-dec10-6')">✕</button></div>
+    <div class="dr" id="dr-dec10-7"><div class="dt">20:00</div><div>Dinner — Oita toriten (fried chicken) &amp; kabosu citrus</div><button class="dr-rm" onclick="hideRow('dr-dec10-7')">✕</button></div>
+  </div>
+  <div class="dp-wrap"><div class="dp-hd">My Plan — Day 8</div><div id="dp-dec10"></div></div>
+
+  <div class="dh"><span>Day 9</span><span style="font-size:.85rem">🔴 Jigoku + Yufuin</span><button class="dh-restore" onclick="restoreDay('dec11')">↩ restore</button><span class="dh-date">Fri Dec 11</span></div>
+  <div class="db">
+    <div class="dr" id="dr-dec11-0"><div class="dt">09:00</div><div>🔴 Jigoku Meguri — 7 Hells of Beppu<div class="dr-sub">Blood Pond, Sea, Tornado &amp; more · combo ticket ¥2,200</div></div><button class="dr-rm" onclick="hideRow('dr-dec11-0')">✕</button></div>
+    <div class="dr" id="dr-dec11-1"><div class="dt">12:30</div><div>🛁 Takegawara Sand Bath (竹瓦温泉)<div class="dr-sub">Buried in hot black volcanic sand by an attendant · 15 min</div></div><button class="dr-rm" onclick="hideRow('dr-dec11-1')">✕</button></div>
+    <div class="dr" id="dr-dec11-2"><div class="dt">14:00</div><div>Drive to Yufuin (~45 min west)</div><button class="dr-rm" onclick="hideRow('dr-dec11-2')">✕</button></div>
+    <div class="dr" id="dr-dec11-3"><div class="dt">15:00</div><div>🛍️ Yu no Tsubo Shotengai — Yufuin craft street<div class="dr-sub">Artisan shops; local sweets, glass art, kokeshi</div></div><button class="dr-rm" onclick="hideRow('dr-dec11-3')">✕</button></div>
+    <div class="dr" id="dr-dec11-4"><div class="dt">16:30</div><div>🌊 Kinrinko Lake walk — misty volcanic lake<div class="dr-sub">Steaming lake at dusk; Mt Yufu twin peaks backdrop</div></div><button class="dr-rm" onclick="hideRow('dr-dec11-4')">✕</button></div>
+    <div class="dr" id="dr-dec11-5"><div class="dt">18:00</div><div>Check in — Hoshinoya Yufuin<div class="dr-sub">1 night · private rotenburo · kaiseki dinner</div></div><button class="dr-rm" onclick="hideRow('dr-dec11-5')">✕</button></div>
+    <div class="dr" id="dr-dec11-6"><div class="dt">19:00</div><div>♨️ Private rotenburo &amp; kaiseki dinner at ryokan</div><button class="dr-rm" onclick="hideRow('dr-dec11-6')">✕</button></div>
+  </div>
+  <div class="dp-wrap"><div class="dp-hd">My Plan — Day 9</div><div id="dp-dec11"></div></div>
+
+  <div class="dh"><span>Day 10</span><span style="font-size:.85rem">🏔️ Aso → Kumamoto</span><button class="dh-restore" onclick="restoreDay('dec12')">↩ restore</button><span class="dh-date">Sat Dec 12</span></div>
+  <div class="db">
+    <div class="dr" id="dr-dec12-0"><div class="dt">08:30</div><div>Yamanami Highway — Yufuin to Mt Aso<div class="dr-sub">One of Japan's most scenic highland drives</div></div><button class="dr-rm" onclick="hideRow('dr-dec12-0')">✕</button></div>
+    <div class="dr" id="dr-dec12-1"><div class="dt">10:30</div><div>🌋 Mt Aso — active volcanic crater<div class="dr-sub">Check eruption status; Nakadake crater rim walk if open</div></div><button class="dr-rm" onclick="hideRow('dr-dec12-1')">✕</button></div>
+    <div class="dr" id="dr-dec12-2"><div class="dt">12:30</div><div>Lunch — Aso local beef or horse sashimi (basashi)</div><button class="dr-rm" onclick="hideRow('dr-dec12-2')">✕</button></div>
+    <div class="dr" id="dr-dec12-3"><div class="dt">14:00</div><div>Drive to Kumamoto (~50 min)</div><button class="dr-rm" onclick="hideRow('dr-dec12-3')">✕</button></div>
+    <div class="dr" id="dr-dec12-4"><div class="dt">15:00</div><div>Check in — The Blossom Kumamoto<div class="dr-sub">Shimotori area · 2 nights</div></div><button class="dr-rm" onclick="hideRow('dr-dec12-4')">✕</button></div>
+    <div class="dr" id="dr-dec12-5"><div class="dt">16:30</div><div>Kumamoto Castle exterior &amp; surroundings<div class="dr-sub">Earthquake-rebuild in progress; impressive even from outside</div></div><button class="dr-rm" onclick="hideRow('dr-dec12-5')">✕</button></div>
+    <div class="dr" id="dr-dec12-6"><div class="dt">18:00</div><div>🏃 Evening run — Castle moat path<div class="dr-sub">Illuminated castle walls; flat 3km loop</div></div><button class="dr-rm" onclick="hideRow('dr-dec12-6')">✕</button></div>
+    <div class="dr" id="dr-dec12-7"><div class="dt">20:00</div><div>Kumamoto ramen dinner — Koumurasaki or Kokutei</div><button class="dr-rm" onclick="hideRow('dr-dec12-7')">✕</button></div>
+  </div>
+  <div class="dp-wrap"><div class="dp-hd">My Plan — Day 10</div><div id="dp-dec12"></div></div>
+
+  <div class="dh"><span>Day 11</span><span style="font-size:.85rem">🏯 Kumamoto + Movie</span><button class="dh-restore" onclick="restoreDay('dec13')">↩ restore</button><span class="dh-date">Sun Dec 13</span></div>
+  <div class="db">
+    <div class="dr" id="dr-dec13-0"><div class="dt">09:00</div><div>🏯 Kumamoto Castle interior tour<div class="dr-sub">Rebuilt after 2016 quake; samurai history, armour collection</div></div><button class="dr-rm" onclick="hideRow('dr-dec13-0')">✕</button></div>
+    <div class="dr" id="dr-dec13-1"><div class="dt">11:00</div><div>🌿 Suizenji Jojuen Garden (水前寺成趣園)<div class="dr-sub">Miniature Tokaido landscape; koi pond; tea house</div></div><button class="dr-rm" onclick="hideRow('dr-dec13-1')">✕</button></div>
+    <div class="dr" id="dr-dec13-2"><div class="dt">12:30</div><div>🐴 Basashi lunch — Sakura-nabe / horse sashimi<div class="dr-sub">Kumamoto's iconic dish</div></div><button class="dr-rm" onclick="hideRow('dr-dec13-2')">✕</button></div>
+    <div class="dr" id="dr-dec13-3"><div class="dt">14:00</div><div>🎬 The Apothecary Diaries Movie (薬屋のひとりごと)<div class="dr-sub">Opens Dec 11 JP · Cinema in Kumamoto · Japanese experience!</div></div><button class="dr-rm" onclick="hideRow('dr-dec13-3')">✕</button></div>
+    <div class="dr" id="dr-dec13-4"><div class="dt">17:00</div><div>Karashimachi shopping — Tsuruya dept store<div class="dr-sub">Kumamoto souvenirs; karashi renkon (mustard lotus root)</div></div><button class="dr-rm" onclick="hideRow('dr-dec13-4')">✕</button></div>
+    <div class="dr" id="dr-dec13-5"><div class="dt">19:00</div><div>Final Kumamoto dinner — izakaya farewell to the road</div><button class="dr-rm" onclick="hideRow('dr-dec13-5')">✕</button></div>
+  </div>
+  <div class="dp-wrap"><div class="dp-hd">My Plan — Day 11</div><div id="dp-dec13"></div></div>
+
+  <div class="dh"><span>Day 12</span><span style="font-size:.85rem">🚗 Return to Fukuoka</span><button class="dh-restore" onclick="restoreDay('dec14')">↩ restore</button><span class="dh-date">Mon Dec 14</span></div>
+  <div class="db">
+    <div class="dr" id="dr-dec14-0"><div class="dt">09:00</div><div>Check out Kumamoto · final morning stroll</div><button class="dr-rm" onclick="hideRow('dr-dec14-0')">✕</button></div>
+    <div class="dr" id="dr-dec14-1"><div class="dt">10:00</div><div>Drive Kumamoto → Fukuoka (~1.5hr expressway)<div class="dr-sub">Return rental car at Fukuoka / FUK airport</div></div><button class="dr-rm" onclick="hideRow('dr-dec14-1')">✕</button></div>
+    <div class="dr" id="dr-dec14-2"><div class="dt">12:00</div><div>Check in — Mitsui Garden Hotel Fukuoka Gion<div class="dr-sub">Last night before departure</div></div><button class="dr-rm" onclick="hideRow('dr-dec14-2')">✕</button></div>
+    <div class="dr" id="dr-dec14-3"><div class="dt">13:00</div><div>Tenjin Underground Shopping · last minute gifts<div class="dr-sub">Fukuoka ramen packets, karashi mentaiko, sweets</div></div><button class="dr-rm" onclick="hideRow('dr-dec14-3')">✕</button></div>
+    <div class="dr" id="dr-dec14-4"><div class="dt">16:00</div><div>Fukuoka Tower / Momochi Beach afternoon</div><button class="dr-rm" onclick="hideRow('dr-dec14-4')">✕</button></div>
+    <div class="dr" id="dr-dec14-5"><div class="dt">18:30</div><div>🍜 Ichiran Ramen — farewell bowl<div class="dr-sub">Solo-booth tonkotsu; the original Fukuoka branch</div></div><button class="dr-rm" onclick="hideRow('dr-dec14-5')">✕</button></div>
+    <div class="dr" id="dr-dec14-6"><div class="dt">21:00</div><div>Pack bags &amp; early night — flight tomorrow 13:15</div><button class="dr-rm" onclick="hideRow('dr-dec14-6')">✕</button></div>
+  </div>
+  <div class="dp-wrap"><div class="dp-hd">My Plan — Day 12</div><div id="dp-dec14"></div></div>
+
+  <div class="dh"><span>Day 13</span><span style="font-size:.85rem">✈️ Departure</span><span class="dh-date">Tue Dec 15</span></div>
+  <div class="db">
+    <div class="dr"><div class="dt">10:00</div><div>Depart hotel → Fukuoka Airport (FUK)<div class="dr-sub">Allow 2 hours before departure</div></div></div>
+    <div class="dr"><div class="dt">13:15</div><div>✈️ CX513 departs FUK → HKG → SIN<div class="dr-sub">Arrive Singapore same evening</div></div></div>
+  </div>
+</div>
+
+<!-- FUKUOKA -->
+<div class="pane" id="pane-fukuoka">
+  <div class="card">
+    <h3>🏙️ Fukuoka Overview</h3>
+    <div class="info-row"><div class="lbl">Nights</div><div class="val">3 (Dec 3–4 + Dec 14)</div></div>
+    <div class="info-row"><div class="lbl">Stay</div><div class="val">Tenjin / Hakata area</div></div>
+    <div class="info-row"><div class="lbl">IC Card</div><div class="val">Nimoca or Hayakaken (buy at airport)</div></div>
+  </div>
+  <div class="hl-tip">💡 Fukuoka is Japan's most liveable city — compact, walkable, incredible food. Tenjin and Hakata are 10 min apart by subway. Most highlights cluster in these two areas.</div>
+  <div class="sec-hd">Highlights</div>
+  <div class="hl-grid">
+    <div class="hl-card"><div class="hl-icon">🏮</div><div class="hl-name">Nakasu Yatai</div><div class="hl-sub">Riverside food stalls · Night 1</div></div>
+    <div class="hl-card"><div class="hl-icon">☕</div><div class="hl-name">FUK Coffee</div><div class="hl-sub">Fukuoka's famed café · Morning 2</div></div>
+    <div class="hl-card"><div class="hl-icon">🤖</div><div class="hl-name">Gundam Statue</div><div class="hl-sub">LaLaport · RX-78 life-size · free</div></div>
+    <div class="hl-card"><div class="hl-icon">🍜</div><div class="hl-name">Ichiran Ramen</div><div class="hl-sub">Solo-booth tonkotsu · farewell bowl</div></div>
+    <div class="hl-card"><div class="hl-icon">🍜</div><div class="hl-name">Tsukemen</div><div class="hl-sub">Dipping broth noodles · Night 2</div></div>
+    <div class="hl-card"><div class="hl-icon">🏃</div><div class="hl-name">Ohori Park Run</div><div class="hl-sub">2km lake loop · Day 2 evening</div></div>
+    <div class="hl-card"><div class="hl-icon">🍵</div><div class="hl-name">Yame Day Trip</div><div class="hl-sub">Hoshino gyokuro tea village</div></div>
+    <div class="hl-card"><div class="hl-icon">⛩️</div><div class="hl-name">Dazaifu Tenmangu</div><div class="hl-sub">Flying plum shrine · Day 3 morning</div></div>
+  </div>
+  <div class="sec-hd">Food &amp; Drink</div>
+  <div class="card">
+    <div class="info-row"><div class="lbl">Ramen</div><div class="val">Ichiran (solo booth tonkotsu, Hakata original), Shin-Shin, Ippudo</div></div>
+    <div class="info-row"><div class="lbl">Tsukemen</div><div class="val">Fukunaga or TsukeOni — thick dipping broth style</div></div>
+    <div class="info-row"><div class="lbl">Yatai</div><div class="val">Nakasu riverside (10+ stalls, open 6pm–2am); Tenjin Yatai alley</div></div>
+    <div class="info-row"><div class="lbl">Coffee</div><div class="val">FUK Coffee (Tenjin); % Arabica (Canal City); The Coffee Bar</div></div>
+    <div class="info-row"><div class="lbl">Sweets</div><div class="val">Mentaiko everything · Hakata no Hito roll cake · 551 Horaien</div></div>
+  </div>
+  <div class="sec-hd">Recovery Program Tips</div>
+  <div class="card">
+    <div class="info-row"><div class="lbl">Discount</div><div class="val">Fukko Ōen Wari — 50% off hotels in Fukuoka via Jalan/Rakuten Travel</div></div>
+    <div class="info-row"><div class="lbl">Klook</div><div class="val">Free Hakata↔Kagoshima shinkansen (up to ¥11,420/person) — book Kagoshima hotel via Klook</div></div>
+    <div class="info-row"><div class="lbl">Note</div><div class="val">Programs change; verify at visit-kyushu.com ~4–6 weeks before travel</div></div>
+  </div>
+</div>
+
+<!-- KAGOSHIMA -->
+<div class="pane" id="pane-kagoshima">
+  <div class="card">
+    <h3>🌋 Kagoshima Overview</h3>
+    <div class="info-row"><div class="lbl">Nights</div><div class="val">2 (Dec 5–6)</div></div>
+    <div class="info-row"><div class="lbl">Discount</div><div class="val">Fukko Ōen Wari 60% off hotels</div></div>
+    <div class="info-row"><div class="lbl">Car</div><div class="val">Pick up rental car here for the road trip</div></div>
+  </div>
+  <div class="hl-tip">💡 Kagoshima = "Naples of the East" — active volcano Sakurajima dominates the skyline. Black pork, shochu, sweet potato are the food pillars. Fukko discount is 60% off — best value on the trip.</div>
+  <div class="sec-hd">Highlights</div>
+  <div class="hl-grid">
+    <div class="hl-card"><div class="hl-icon">🌋</div><div class="hl-name">Sakurajima</div><div class="hl-sub">Active volcano; 15min ferry</div></div>
+    <div class="hl-card"><div class="hl-icon">🐍</div><div class="hl-name">Lake Ikeda</div><div class="hl-sub">Giant eels (Ossie) · Day 4</div></div>
+    <div class="hl-card"><div class="hl-icon">🏯</div><div class="hl-name">Sengan-en</div><div class="hl-sub">UNESCO clan garden · Day 4</div></div>
+    <div class="hl-card"><div class="hl-icon">🌅</div><div class="hl-name">Shiroyama</div><div class="hl-sub">Observatory sunset panorama</div></div>
+    <div class="hl-card"><div class="hl-icon">🍠</div><div class="hl-name">Sweet Potato</div><div class="hl-sub">Ibusuki; purple ice cream</div></div>
+    <div class="hl-card"><div class="hl-icon">🍣</div><div class="hl-name">Mawaru Sushi</div><div class="hl-sub">Local conveyor sushi · Night 3</div></div>
+    <div class="hl-card"><div class="hl-icon">🏃</div><div class="hl-name">Waterfront Run</div><div class="hl-sub">Dolphin Port 5km · Eve Day 4</div></div>
+    <div class="hl-card"><div class="hl-icon">🐷</div><div class="hl-name">Kurobuta Pork</div><div class="hl-sub">Black pork shabu-shabu dinner</div></div>
+  </div>
+  <div class="sec-hd">Food</div>
+  <div class="card">
+    <div class="info-row"><div class="lbl">Must-eat</div><div class="val">Kurobuta (black pork) shabu-shabu or tonkatsu — Tenmonkan area</div></div>
+    <div class="info-row"><div class="lbl">Sushi</div><div class="val">Mawaru Kaiten Sushi Kagoshima — local catches Aji &amp; Kinmedai</div></div>
+    <div class="info-row"><div class="lbl">Sweet</div><div class="val">Shirokuma kakigori, Karukan sweet potato cake, purple sweet potato ice cream</div></div>
+    <div class="info-row"><div class="lbl">Drink</div><div class="val">Imo-jochu (sweet potato shochu) — pick up bottles to bring home</div></div>
+  </div>
+</div>
+
+<!-- KIRISHIMA -->
+<div class="pane" id="pane-kirishima">
+  <div class="card">
+    <h3>⛩️ Kirishima Highlands</h3>
+    <div class="info-row"><div class="lbl">Nights</div><div class="val">1 (Dec 7)</div></div>
+    <div class="info-row"><div class="lbl">Stay</div><div class="val">Onsen Ryokan — Kirishima Onsen area</div></div>
+    <div class="info-row"><div class="lbl">Discount</div><div class="val">Fukko Ōen Wari 50% off</div></div>
+    <div class="info-row"><div class="lbl">Drive</div><div class="val">~1.5hr north from Kagoshima via Kirishima Skyline</div></div>
+  </div>
+  <div class="hl-tip">💡 One of Kyushu's most mystical areas — volcanoes, shrines, highland plateaus and some of Japan's best onsen. The ryokan here is a trip highlight.</div>
+  <div class="sec-hd">Highlights</div>
+  <div class="hl-grid">
+    <div class="hl-card"><div class="hl-icon">⛩️</div><div class="hl-name">Kirishima Jingu</div><div class="hl-sub">Sacred volcanic shrine complex</div></div>
+    <div class="hl-card"><div class="hl-icon">🥾</div><div class="hl-name">Takachiho-gawara</div><div class="hl-sub">Mythological birthplace of Japan</div></div>
+    <div class="hl-card"><div class="hl-icon">🏔️</div><div class="hl-name">Ebino Kogen</div><div class="hl-sub">Crater lake walk; alpine plateau</div></div>
+    <div class="hl-card"><div class="hl-icon">♨️</div><div class="hl-name">Onsen Ryokan</div><div class="hl-sub">Indoor &amp; outdoor hot spring baths</div></div>
+  </div>
+  <div class="card">
+    <h3>♨️ Ryokan Tips</h3>
+    <div class="info-row"><div class="lbl">Check-in</div><div class="val">3pm; dinner usually 6:30pm, breakfast 7:30am</div></div>
+    <div class="info-row"><div class="lbl">Onsen</div><div class="val">Separate male/female or book private rotenburo; wash before entering</div></div>
+    <div class="info-row"><div class="lbl">Hotel</div><div class="val">Hoshinoya Kirishima</div></div>
+    <div class="info-row"><div class="lbl">Book via</div><div class="val">Hoshino Resorts direct or Jalan/Rakuten for Fukko 50% discount</div></div>
+  </div>
+</div>
+
+<!-- MIYAZAKI -->
+<div class="pane" id="pane-miyazaki">
+  <div class="card">
+    <h3>🏖️ Miyazaki Overview</h3>
+    <div class="info-row"><div class="lbl">Nights</div><div class="val">2 (Dec 8–9)</div></div>
+    <div class="info-row"><div class="lbl">Stay</div><div class="val">Container Hotel (Dec 8) + Miyazaki city (Dec 9)</div></div>
+    <div class="info-row"><div class="lbl">Discount</div><div class="val">Fukko Ōen Wari 50% off</div></div>
+  </div>
+  <div class="hl-tip">💡 Japan's sunniest prefecture. The Nichinan Coast is spectacular. Miyazaki wagyu rivals Matsusaka. The container hotel BBQ is a trip highlight — confirm the wagyu BBQ package when booking!</div>
+  <div class="sec-hd">Highlights</div>
+  <div class="hl-grid">
+    <div class="hl-card"><div class="hl-icon">🔥</div><div class="hl-name">Container Hotel BBQ</div><div class="hl-sub">Miyazaki wagyu grill · Night 6</div></div>
+    <div class="hl-card"><div class="hl-icon">🏝️</div><div class="hl-name">Aoshima Island</div><div class="hl-sub">Jungle shrine on rocky causeway</div></div>
+    <div class="hl-card"><div class="hl-icon">⛩️</div><div class="hl-name">Udo Jingu</div><div class="hl-sub">Sea cave shrine · pottery balls</div></div>
+    <div class="hl-card"><div class="hl-icon">🗿</div><div class="hl-name">Sun Messe Moai</div><div class="hl-sub">7 Easter Island moai replicas</div></div>
+    <div class="hl-card"><div class="hl-icon">🐴</div><div class="hl-name">Cape Toi</div><div class="hl-sub">Wild Misaki horses on clifftop</div></div>
+    <div class="hl-card"><div class="hl-icon">🥩</div><div class="hl-name">Miyazaki Wagyu</div><div class="hl-sub">A5 beef · teppanyaki dinner</div></div>
+    <div class="hl-card"><div class="hl-icon">🍗</div><div class="hl-name">Chicken Nanban</div><div class="hl-sub">Miyazaki's signature dish</div></div>
+    <div class="hl-card"><div class="hl-icon">🌊</div><div class="hl-name">Nichinan Coast</div><div class="hl-sub">Scenic cliff road Route 220</div></div>
+  </div>
+  <div class="card">
+    <h3>🏕️ Container Hotel</h3>
+    <div class="info-row"><div class="lbl">Hotel</div><div class="val">1NLDK Aoshima, Miyazaki</div></div>
+    <div class="info-row"><div class="lbl">BBQ</div><div class="val">Pre-order Miyazaki wagyu BBQ package; outdoor grill setup</div></div>
+    <div class="info-row"><div class="lbl">Tip</div><div class="val">Book early, limited rooms. Confirm wagyu BBQ service at time of booking</div></div>
+  </div>
+</div>
+
+<!-- BEPPU & YUFUIN -->
+<div class="pane" id="pane-beppu">
+  <div class="card">
+    <h3>♨️ Beppu &amp; Yufuin</h3>
+    <div class="info-row"><div class="lbl">Nights</div><div class="val">1 Beppu (Dec 10) + 1 Yufuin (Dec 11)</div></div>
+    <div class="info-row"><div class="lbl">Discount</div><div class="val">Fukko Ōen Wari 50% off both</div></div>
+    <div class="info-row"><div class="lbl">Drive</div><div class="val">Beppu → Yufuin: ~45 min (same Oita prefecture)</div></div>
+  </div>
+  <div class="hl-tip">💡 Beppu has the most thermal water output in the world. Do the hells + sand bath in the morning, then drive to peaceful Yufuin for an afternoon lake walk and ryokan evening.</div>
+  <div class="sec-hd">Beppu Highlights</div>
+  <div class="hl-grid">
+    <div class="hl-card"><div class="hl-icon">🔴</div><div class="hl-name">Jigoku Meguri</div><div class="hl-sub">7 colour hells; Blood Pond + Sea</div></div>
+    <div class="hl-card"><div class="hl-icon">🏖️</div><div class="hl-name">Takegawara Sand Bath</div><div class="hl-sub">Buried in hot volcanic black sand</div></div>
+    <div class="hl-card"><div class="hl-icon">🍠</div><div class="hl-name">Jigoku-mushi Steam</div><div class="hl-sub">Cook food in volcanic steam vents</div></div>
+    <div class="hl-card"><div class="hl-icon">♨️</div><div class="hl-name">Hyotan Onsen</div><div class="hl-sub">Award-winning bathhouse complex</div></div>
+  </div>
+  <div class="sec-hd">Yufuin Highlights</div>
+  <div class="hl-grid">
+    <div class="hl-card"><div class="hl-icon">🌊</div><div class="hl-name">Kinrinko Lake</div><div class="hl-sub">Misty volcanic lake · Mt Yufu</div></div>
+    <div class="hl-card"><div class="hl-icon">🛍️</div><div class="hl-name">Yu no Tsubo St</div><div class="hl-sub">Craft street · glass art · sweets</div></div>
+    <div class="hl-card"><div class="hl-icon">♨️</div><div class="hl-name">Yufuin Ryokan</div><div class="hl-sub">Private rotenburo; kaiseki dinner</div></div>
+    <div class="hl-card"><div class="hl-icon">🏔️</div><div class="hl-name">Mt Yufu</div><div class="hl-sub">Twin peak backdrop; hike if keen</div></div>
+  </div>
+  <div class="card">
+    <h3>🎟️ Jigoku Meguri Tips</h3>
+    <div class="info-row"><div class="lbl">Ticket</div><div class="val">Combo ¥2,200 covers 7 hells (vs ¥5,600 individual)</div></div>
+    <div class="info-row"><div class="lbl">Time</div><div class="val">Allow 2.5hrs; start at Umi (Sea) Hell — most dramatic</div></div>
+    <div class="info-row"><div class="lbl">Food</div><div class="val">Buy steam-eggs and hell pudding at the stalls</div></div>
+    <div class="info-row"><div class="lbl">Takachiho</div><div class="val">Book rowboats online in advance — slots fill early, especially weekends</div></div>
+  </div>
+</div>
+
+<!-- KUMAMOTO -->
+<div class="pane" id="pane-kumamoto">
+  <div class="card">
+    <h3>🏯 Kumamoto Overview</h3>
+    <div class="info-row"><div class="lbl">Nights</div><div class="val">2 (Dec 12–13)</div></div>
+    <div class="info-row"><div class="lbl">Discount</div><div class="val">Fukko Ōen Wari 60% off hotels</div></div>
+    <div class="info-row"><div class="lbl">Car Drop</div><div class="val">Return at Fukuoka or arrange one-way drop at Kumamoto</div></div>
+  </div>
+  <div class="hl-tip">💡 Kumamoto Castle is one of Japan's finest. The 2016 earthquake rebuild is a story in itself. Watch Apothecary Diaries in a Japanese cinema for a uniquely Japan experience!</div>
+  <div class="sec-hd">Highlights</div>
+  <div class="hl-grid">
+    <div class="hl-card"><div class="hl-icon">🏯</div><div class="hl-name">Kumamoto Castle</div><div class="hl-sub">Interior tour; earthquake rebuild</div></div>
+    <div class="hl-card"><div class="hl-icon">🌿</div><div class="hl-name">Suizenji Garden</div><div class="hl-sub">Tokaido miniature landscape</div></div>
+    <div class="hl-card"><div class="hl-icon">🐴</div><div class="hl-name">Basashi</div><div class="hl-sub">Horse sashimi; Kumamoto specialty</div></div>
+    <div class="hl-card"><div class="hl-icon">🎬</div><div class="hl-name">Apothecary Diaries</div><div class="hl-sub">Movie in Japanese! Opens Dec 11</div></div>
+    <div class="hl-card"><div class="hl-icon">🏃</div><div class="hl-name">Castle Moat Run</div><div class="hl-sub">Illuminated 3km evening loop</div></div>
+    <div class="hl-card"><div class="hl-icon">🌋</div><div class="hl-name">Mt Aso</div><div class="hl-sub">Active caldera; 50min drive away</div></div>
+    <div class="hl-card"><div class="hl-icon">🍜</div><div class="hl-name">Kumamoto Ramen</div><div class="hl-sub">Ma-yu garlic-lard tonkotsu style</div></div>
+    <div class="hl-card"><div class="hl-icon">🛍️</div><div class="hl-name">Tsuruya Dept Store</div><div class="hl-sub">Karashi renkon; local souvenirs</div></div>
+  </div>
+  <div class="card">
+    <h3>🎬 Apothecary Diaries Movie</h3>
+    <div class="info-row"><div class="lbl">Release</div><div class="val">December 11, 2026 (Japan theatrical)</div></div>
+    <div class="info-row"><div class="lbl">Plan</div><div class="val">Afternoon session Dec 13 at a Kumamoto city cinema</div></div>
+    <div class="info-row"><div class="lbl">Booking</div><div class="val">Book tickets online via 映画.com or cinema website in advance</div></div>
+    <div class="info-row"><div class="lbl">Tip</div><div class="val">No English subs expected — just vibe the visual storytelling!</div></div>
+  </div>
+</div>
+
+<!-- OUR PLACES -->
+<div class="pane" id="pane-places">
+  <div class="sec-hd">Save a Place</div>
+  <div class="spc-form">
+    <select id="spc-cat">
+      <option value="🍜">🍜 Ramen / Noodles</option>
+      <option value="🍣">🍣 Sushi / Seafood</option>
+      <option value="🥩">🥩 Meat / BBQ</option>
+      <option value="☕">☕ Café / Coffee</option>
+      <option value="🍡">🍡 Sweets / Snacks</option>
+      <option value="🍶">🍶 Bar / Izakaya</option>
+      <option value="⛩️">⛩️ Temple / Shrine</option>
+      <option value="🏯">🏯 Castle / Museum</option>
+      <option value="🏖️">🏖️ Nature / Outdoors</option>
+      <option value="♨️">♨️ Onsen / Bath</option>
+      <option value="🛍️">🛍️ Shopping</option>
+      <option value="🏨">🏨 Hotel / Stay</option>
+      <option value="📍">📍 Other</option>
+    </select>
+    <input type="text" id="spc-name" placeholder="Place name">
+    <input type="text" id="spc-area" placeholder="Area / City (e.g. Kagoshima)">
+    <input type="text" id="spc-maps" placeholder="Google Maps link (optional)">
+    <textarea id="spc-note" placeholder="Notes (hours, what to order, tips…)"></textarea>
+    <button class="spc-btn" onclick="addPlace()">📍 Save Place</button>
+  </div>
+  <div class="sec-hd">Saved Places</div>
+  <div id="spc-list"><div style="text-align:center;color:#94a3b8;font-size:.78rem;padding:20px">No places saved yet</div></div>
+</div>
+
+<!-- BUDGET -->
+<div class="pane" id="pane-budget">
+  <div class="card">
+    <h3>💴 Trip Budget Tracker</h3>
+    <p style="font-size:.72rem;color:var(--muted);margin-bottom:10px">Edit the Actual column as you spend. Amounts in SGD.</p>
+    <table class="btbl">
+      <thead><tr><th>Category</th><th class="num">Actual (SGD)</th></tr></thead>
+      <tbody>
+        <tr><td>✈️ Flights (CX round trip x2)</td><td class="num"><input class="budget-input" id="ba-flights" type="number" placeholder="0"></td></tr>
+        <tr><td>🏨 Accommodation (12 nights)</td><td class="num"><input class="budget-input" id="ba-accom" type="number" placeholder="0"></td></tr>
+        <tr><td>🚗 Car Rental (Kagoshima→Fukuoka)</td><td class="num"><input class="budget-input" id="ba-car" type="number" placeholder="0"></td></tr>
+        <tr><td>⛽ Petrol &amp; Tolls</td><td class="num"><input class="budget-input" id="ba-fuel" type="number" placeholder="0"></td></tr>
+        <tr><td>🚄 Shinkansen (Klook FREE)</td><td class="num"><input class="budget-input" id="ba-train" type="number" placeholder="0"></td></tr>
+        <tr><td>🍜 Food &amp; Drink</td><td class="num"><input class="budget-input" id="ba-food" type="number" placeholder="0"></td></tr>
+        <tr><td>🎟️ Activities &amp; Entry</td><td class="num"><input class="budget-input" id="ba-act" type="number" placeholder="0"></td></tr>
+        <tr><td>🛍️ Shopping &amp; Gifts</td><td class="num"><input class="budget-input" id="ba-shop" type="number" placeholder="0"></td></tr>
+        <tr><td>📦 Misc / SIM / IC card</td><td class="num"><input class="budget-input" id="ba-misc" type="number" placeholder="0"></td></tr>
+        <tr><td><strong>Total</strong></td><td class="num" id="ba-total"><strong>$0</strong></td></tr>
+      </tbody>
+    </table>
+    <button onclick="saveBudget()" style="margin-top:10px;background:var(--gn);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:.8rem;font-weight:700;cursor:pointer">💾 Save</button>
+  </div>
+  <div class="card">
+    <h3>💡 Savings Tips</h3>
+    <div class="info-row"><div class="lbl">Shinkansen</div><div class="val">FREE via Klook Kyushu Recovery (up to ¥22,840 for 2 people)</div></div>
+    <div class="info-row"><div class="lbl">Hotels</div><div class="val">Fukko Ōen Wari: 60% off Kagoshima &amp; Kumamoto, 50% off rest</div></div>
+    <div class="info-row"><div class="lbl">IC Card</div><div class="val">Nimoca or Suica covers buses &amp; subway throughout Kyushu</div></div>
+    <div class="info-row"><div class="lbl">Jigoku</div><div class="val">Combo ¥2,200 for 7 hells vs ¥5,600 individual</div></div>
+    <div class="info-row"><div class="lbl">Cash</div><div class="val">7-Eleven ATM best rates; keep ¥30,000+ in cash always</div></div>
+  </div>
+</div>
+
+<!-- LOGISTICS -->
+<div class="pane" id="pane-logistics">
+  <div class="card">
+    <h3>✈️ Flights</h3>
+    <div class="lg-item"><div class="lg-icon">🛬</div><div class="lg-info"><div class="lg-title">Inbound: CX513 SIN → HKG → FUK</div><div class="lg-desc">Depart SGP 01:25 · Arrive FUK 14:15 · Dec 3, 2026 · Ref: E3C6PQ</div></div></div>
+    <div class="lg-item"><div class="lg-icon">🛫</div><div class="lg-info"><div class="lg-title">Outbound: CX513 FUK → HKG → SIN</div><div class="lg-desc">Depart FUK 13:15 · Dec 15, 2026 · Same booking ref E3C6PQ</div></div></div>
+  </div>
+  <div class="card">
+    <h3>🚗 Car Rental</h3>
+    <div class="lg-item"><div class="lg-icon">🚗</div><div class="lg-info"><div class="lg-title">One-Way Rental: Kagoshima → Fukuoka</div><div class="lg-desc">Pick up Kagoshima-Chuo area · Drop off Fukuoka Airport or city · One-way fee applies (~¥5,000–15,000 extra) · Book in advance</div></div></div>
+    <div class="lg-item"><div class="lg-icon">🪪</div><div class="lg-info"><div class="lg-title">International Driving Permit (IDP)</div><div class="lg-desc">Required for Singapore licence holders · Get at SingPost or AA Singapore BEFORE travelling</div></div></div>
+    <div class="lg-item"><div class="lg-icon">💳</div><div class="lg-info"><div class="lg-title">ETC Card (Electronic Tolls)</div><div class="lg-desc">Rent from car rental company · Saves queuing &amp; ~30% off some expressway tolls</div></div></div>
+    <div class="lg-item"><div class="lg-icon">🗺️</div><div class="lg-info"><div class="lg-title">Navigation</div><div class="lg-desc">Google Maps works well in Japan. Download Kyushu offline map. Yahoo!カーナビ (free) is excellent for Japanese roads.</div></div></div>
+  </div>
+  <div class="card">
+    <h3>🎟️ Kyushu Recovery Programs</h3>
+    <div class="lg-item"><div class="lg-icon">🚄</div><div class="lg-info"><div class="lg-title">Klook Free Shinkansen — Hakata ↔ Kagoshima</div><div class="lg-desc">Up to ¥11,420 per person · Book Kagoshima hotel via Klook to qualify · Singapore residents · Book early — limited availability</div></div></div>
+    <div class="lg-item"><div class="lg-icon">🏨</div><div class="lg-info"><div class="lg-title">Fukko Ōen Wari Hotel Discount</div><div class="lg-desc">Kagoshima &amp; Kumamoto: 60% off · Other Kyushu: 50% off · Book via Jalan (じゃらん) or Rakuten Travel · Check foreign tourist eligibility closer to Dec</div></div></div>
+    <div class="lg-item"><div class="lg-icon">⚠️</div><div class="lg-info"><div class="lg-title">Important Note</div><div class="lg-desc">Recovery programs change frequently. Verify at visit-kyushu.com 4–6 weeks before travel.</div></div></div>
+  </div>
+  <div class="card">
+    <h3>📱 Connectivity &amp; Apps</h3>
+    <div class="lg-item"><div class="lg-icon">📶</div><div class="lg-info"><div class="lg-title">SIM / Pocket WiFi</div><div class="lg-desc">IIJmio or Docomo tourist SIM (buy at FUK airport) · Or pocket WiFi from airport counter</div></div></div>
+    <div class="lg-item"><div class="lg-icon">📱</div><div class="lg-info"><div class="lg-title">Useful Apps</div><div class="lg-desc">Google Maps · Google Translate (camera mode) · Tabelog (restaurants) · Yahoo!カーナビ (driving) · じゃらん / Jalan (hotels)</div></div></div>
+    <div class="lg-item"><div class="lg-icon">💴</div><div class="lg-info"><div class="lg-title">Cash</div><div class="lg-desc">Japan still heavily cash-based. Use 7-Eleven ATM for best rates. Carry ¥30,000+ always. Change some SGD before departure.</div></div></div>
+  </div>
+  <div class="card">
+    <h3>🗓️ Accommodation Summary</h3>
+    <table class="btbl">
+      <thead><tr><th>Location</th><th>Dates</th><th class="num">Nights</th></tr></thead>
+      <tbody>
+        <tr><td>🏙️ Fukuoka · <em>Candeo Hotel Fukuoka</em></td><td>Dec 3–4</td><td class="num">2</td></tr>
+        <tr><td>🌋 Kagoshima · <em>Fav Lux Kagoshima</em></td><td>Dec 5–6</td><td class="num">2</td></tr>
+        <tr><td>⛩️ Kirishima · <em>Hoshinoya Kirishima</em></td><td>Dec 7</td><td class="num">1</td></tr>
+        <tr><td>🏖️ Miyazaki · <em>1NLDK Aoshima</em></td><td>Dec 8–9</td><td class="num">2</td></tr>
+        <tr><td>♨️ Beppu · <em>Mure Beppu</em></td><td>Dec 10</td><td class="num">1</td></tr>
+        <tr><td>♨️ Yufuin · <em>Hoshinoya Yufuin</em></td><td>Dec 11</td><td class="num">1</td></tr>
+        <tr><td>🏯 Kumamoto · <em>The Blossom Kumamoto</em></td><td>Dec 12–13</td><td class="num">2</td></tr>
+        <tr><td>🏙️ Fukuoka · <em>Mitsui Garden Hotel Gion</em></td><td>Dec 14</td><td class="num">1</td></tr>
+        <tr><td><strong>Total</strong></td><td></td><td class="num"><strong>12</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- RANDOMISER -->
+<div class="pane" id="pane-random">
+  <div class="card">
+    <h3>🎲 Spin for Tonight</h3>
+    <p style="font-size:.75rem;color:var(--muted);margin-bottom:4px">Can't decide what to eat or do? Let fate choose!</p>
+  </div>
+  <button class="spin-btn" onclick="spinEat()">🍜 Spin for Food</button>
+  <div class="spin-result" id="sr-eat"></div>
+  <br>
+  <button class="spin-btn" style="background:linear-gradient(135deg,var(--tl),#005f8a)" onclick="spinDo()">🎯 Spin for Activity</button>
+  <div class="spin-result" id="sr-do"></div>
+</div>
+
+<!-- PICKER MODAL -->
+<div class="pk-ov" id="picker">
+  <div class="pk-box">
+    <div class="pk-hd">
+      <h3 id="pk-title">Add to Plan</h3>
+      <button class="pk-close" onclick="closePicker()">✕</button>
+    </div>
+    <div class="pk-filter" id="pk-filter"></div>
+    <input class="pk-search" id="pk-search" type="text" placeholder="Search places, food, activities…" oninput="filterPicker()">
+    <div class="pk-list" id="pk-list"></div>
+  </div>
+</div>
+
+<script>
+// Storage
+const DB='fk26:';
+function sGet(k){try{var v=localStorage.getItem(DB+k);return v?JSON.parse(v):null}catch(e){return null}}
+function sSet(k,v){try{localStorage.setItem(DB+k,JSON.stringify(v))}catch(e){}}
+
+// Tabs
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  var pane=document.getElementById('pane-'+id);
+  if(pane)pane.classList.add('active');
+  document.querySelectorAll('.tab').forEach(function(t){
+    if(t.getAttribute('onclick')==="switchTab('"+id+"')") t.classList.add('active');
+  });
+}
+
+// Hide / Restore
+var hiddenRows=new Set((sGet('hidden')||[]).map(String));
+function applyHidden(){hiddenRows.forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='none';});}
+function hideRow(id){var el=document.getElementById(id);if(!el)return;el.style.display='none';hiddenRows.add(id);sSet('hidden',[...hiddenRows]);}
+function restoreDay(day){[...hiddenRows].filter(function(id){return id.startsWith('dr-'+day+'-');}).forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='';hiddenRows.delete(id);});sSet('hidden',[...hiddenRows]);}
+
+// Day Planner
+var DPK='dayplan';
+var dayPlan=sGet(DPK)||{};
+var dpPool={};
+var DAYS=['dec03','dec04','dec05','dec06','dec07','dec08','dec09','dec10','dec11','dec12','dec13','dec14'];
+
+function renderDP(day){
+  var el=document.getElementById('dp-'+day);if(!el)return;
+  var items=dayPlan[day]||[];
+  dpPool[day]=items.slice();
+  var rows=items.map(function(it,idx){
+    var meta=[it.area,it.cat].filter(Boolean).join(' · ');
+    return '<div class="dp-row"><div class="dp-row-info">'+(it.cat||'📍')+' '+it.name+'<span class="dp-row-meta">'+(meta?' · '+meta:'')+'</span></div><button class="dp-row-rm" data-day="'+day+'" data-idx="'+idx+'">✕</button></div>';
+  }).join('');
+  el.innerHTML=(items.length?rows:'<div class="dp-none">No activities planned yet — tap below to add</div>')+'<button class="dp-add" data-day="'+day+'">➕ Add activity / place / food</button>';
+  el.querySelectorAll('.dp-row-rm').forEach(function(btn){
+    btn.onclick=function(){removeDP(this.dataset.day,parseInt(this.dataset.idx));};
+  });
+  el.querySelectorAll('.dp-add').forEach(function(btn){
+    btn.onclick=function(){openPicker(this.dataset.day);};
+  });
+}
+function removeDP(day,idx){
+  var pool=dpPool[day]||[];var it=pool[idx];if(!it)return;
+  if(!dayPlan[day])return;
+  dayPlan[day]=dayPlan[day].filter(function(x){return x.uid!==it.uid;});
+  sSet(DPK,dayPlan);renderDP(day);
+}
+function initDP(){DAYS.forEach(function(d){if(!dayPlan[d])dayPlan[d]=[];renderDP(d);});}
+
+// Master places list
+var MASTER=[
+  {uid:'m0',name:'FUK Coffee',area:'Fukuoka',cat:'☕'},
+  {uid:'m1',name:'Nakasu Yatai',area:'Fukuoka',cat:'🍶'},
+  {uid:'m2',name:'Ichiran Ramen',area:'Fukuoka',cat:'🍜'},
+  {uid:'m3',name:'Tsukemen',area:'Fukuoka',cat:'🍜'},
+  {uid:'m4',name:'Gundam Statue (LaLaport)',area:'Fukuoka',cat:'📍'},
+  {uid:'m5',name:'Ohori Park Run',area:'Fukuoka',cat:'🏃'},
+  {uid:'m6',name:'Canal City Hakata',area:'Fukuoka',cat:'🛍️'},
+  {uid:'m7',name:'Dazaifu Tenmangu',area:'Fukuoka',cat:'⛩️'},
+  {uid:'m8',name:'Yame Hoshino Tea',area:'Yame',cat:'☕'},
+  {uid:'m9',name:'Sakurajima',area:'Kagoshima',cat:'🌋'},
+  {uid:'m10',name:'Lake Ikeda (giant eels)',area:'Kagoshima',cat:'🏖️'},
+  {uid:'m11',name:'Sengan-en Garden',area:'Kagoshima',cat:'🏯'},
+  {uid:'m12',name:'Shiroyama Observatory',area:'Kagoshima',cat:'🏖️'},
+  {uid:'m13',name:'Mawaru Kaiten Sushi',area:'Kagoshima',cat:'🍣'},
+  {uid:'m14',name:'Tenmonkan Arcade',area:'Kagoshima',cat:'🛍️'},
+  {uid:'m15',name:'Sweet Potato Shopping (Ibusuki)',area:'Kagoshima',cat:'🍡'},
+  {uid:'m16',name:'Kurobuta Shabu-Shabu',area:'Kagoshima',cat:'🥩'},
+  {uid:'m17',name:'Waterfront Run',area:'Kagoshima',cat:'🏃'},
+  {uid:'m18',name:'Kirishima Jingu',area:'Kirishima',cat:'⛩️'},
+  {uid:'m19',name:'Takachiho-gawara Hike',area:'Kirishima',cat:'🏖️'},
+  {uid:'m20',name:'Ebino Kogen Crater Lakes',area:'Kirishima',cat:'🏖️'},
+  {uid:'m21',name:'Kirishima Onsen Ryokan',area:'Kirishima',cat:'♨️'},
+  {uid:'m22',name:'Aoshima Island & Shrine',area:'Miyazaki',cat:'⛩️'},
+  {uid:'m23',name:'Udo Jingu (Sea Cave)',area:'Miyazaki',cat:'⛩️'},
+  {uid:'m24',name:'Sun Messe Nichinan',area:'Miyazaki',cat:'📍'},
+  {uid:'m25',name:'Cape Toi Wild Horses',area:'Miyazaki',cat:'🏖️'},
+  {uid:'m26',name:'Container Hotel BBQ',area:'Miyazaki',cat:'🥩'},
+  {uid:'m27',name:'Miyazaki Wagyu Dinner',area:'Miyazaki',cat:'🥩'},
+  {uid:'m28',name:'Chicken Nanban',area:'Miyazaki',cat:'🍗'},
+  {uid:'m29',name:'Heiwadai Haniwa Garden',area:'Miyazaki',cat:'🏖️'},
+  {uid:'m30',name:'Jigoku Meguri (7 Hells)',area:'Beppu',cat:'♨️'},
+  {uid:'m31',name:'Takegawara Sand Bath',area:'Beppu',cat:'♨️'},
+  {uid:'m32',name:'Kannawa Steam Food',area:'Beppu',cat:'🍡'},
+  {uid:'m33',name:'Hyotan Onsen',area:'Beppu',cat:'♨️'},
+  {uid:'m34',name:'Takachiho Gorge Rowboat',area:'Takachiho',cat:'📍'},
+  {uid:'m35',name:'Kinrinko Lake Walk',area:'Yufuin',cat:'🏖️'},
+  {uid:'m36',name:'Yu no Tsubo Street',area:'Yufuin',cat:'🛍️'},
+  {uid:'m37',name:'Yufuin Ryokan',area:'Yufuin',cat:'♨️'},
+  {uid:'m38',name:'Kumamoto Castle',area:'Kumamoto',cat:'🏯'},
+  {uid:'m39',name:'Suizenji Garden',area:'Kumamoto',cat:'🏖️'},
+  {uid:'m40',name:'Basashi (Horse Sashimi)',area:'Kumamoto',cat:'🥩'},
+  {uid:'m41',name:'Apothecary Diaries Movie',area:'Kumamoto',cat:'📍'},
+  {uid:'m42',name:'Mt Aso Crater',area:'Kumamoto',cat:'📍'},
+  {uid:'m43',name:'Castle Moat Evening Run',area:'Kumamoto',cat:'🏃'},
+  {uid:'m44',name:'Kumamoto Ramen',area:'Kumamoto',cat:'🍜'},
+  {uid:'m45',name:'Yamanami Highway Drive',area:'Kumamoto',cat:'📍'}
+];
+
+// Picker
+var pickerDay='';var pkFilter='All';
+var CATS=['All','🍜','🍣','🥩','☕','🍡','🍶','⛩️','🏯','🏖️','♨️','🛍️','🏃','📍'];
+
+function openPicker(day){
+  pickerDay=day;pkFilter='All';
+  document.getElementById('pk-title').textContent='Add to Day '+(day.replace('dec','Dec '));
+  document.getElementById('pk-search').value='';
+  renderPkFilter();filterPicker();
+  document.getElementById('picker').classList.add('open');
+}
+function closePicker(){document.getElementById('picker').classList.remove('open');}
+function renderPkFilter(){
+  document.getElementById('pk-filter').innerHTML=CATS.map(function(c){
+    return '<button class="pk-fchip'+(c===pkFilter?' active':'')+'" onclick="setPkFilter(\''+c+'\')">'+(c==='All'?'All':c)+'</button>';
+  }).join('');
+}
+function setPkFilter(c){pkFilter=c;renderPkFilter();filterPicker();}
+function filterPicker(){
+  var q=document.getElementById('pk-search').value.toLowerCase();
+  var items=MASTER.filter(function(it){
+    var matchCat=pkFilter==='All'||it.cat===pkFilter;
+    var matchQ=!q||(it.name.toLowerCase().includes(q)||it.area.toLowerCase().includes(q));
+    return matchCat&&matchQ;
+  });
+  var list=document.getElementById('pk-list');
+  if(!items.length){list.innerHTML='<div style="padding:20px;text-align:center;color:#94a3b8;font-size:.78rem">No matches</div>';return;}
+  list.innerHTML=items.map(function(it){
+    return '<div class="pk-item" data-uid="'+it.uid+'"><div class="pk-icon">'+(it.cat||'📍')+'</div><div class="pk-info"><div class="pk-name">'+it.name+'</div><div class="pk-meta">'+it.area+'</div></div></div>';
+  }).join('');
+  list.querySelectorAll('.pk-item').forEach(function(el){
+    el.onclick=function(){
+      var uid=this.dataset.uid;
+      var it=MASTER.find(function(x){return x.uid===uid;});
+      if(it)addToDay(it);
+    };
+  });
+}
+function addToDay(it){
+  if(!dayPlan[pickerDay])dayPlan[pickerDay]=[];
+  if(dayPlan[pickerDay].some(function(x){return x.uid===it.uid;})){closePicker();return;}
+  dayPlan[pickerDay].push(Object.assign({},it));
+  sSet(DPK,dayPlan);renderDP(pickerDay);closePicker();
+}
+
+// Our Places
+var SPK='places';
+var places=sGet(SPK)||[];
+function addPlace(){
+  var name=document.getElementById('spc-name').value.trim();if(!name)return;
+  var p={uid:'p'+Date.now(),cat:document.getElementById('spc-cat').value,name:name,area:document.getElementById('spc-area').value.trim(),maps:document.getElementById('spc-maps').value.trim(),note:document.getElementById('spc-note').value.trim()};
+  places.unshift(p);sSet(SPK,places);renderPlaces();
+  ['spc-name','spc-area','spc-maps','spc-note'].forEach(function(id){document.getElementById(id).value='';});
+}
+function removePlace(uid){places=places.filter(function(p){return p.uid!==uid;});sSet(SPK,places);renderPlaces();}
+function renderPlaces(){
+  var el=document.getElementById('spc-list');
+  if(!places.length){el.innerHTML='<div style="text-align:center;color:#94a3b8;font-size:.78rem;padding:20px">No places saved yet</div>';return;}
+  el.innerHTML=places.map(function(p){
+    return '<div class="spc-row"><div class="spc-cat">'+p.cat+'</div><div class="spc-inf"><div class="spc-nm">'+p.name+'</div><div class="spc-meta">'+(p.area||'')+'</div>'+(p.note?'<div class="spc-note">'+p.note+'</div>':'')+(p.maps?'<a class="spc-maps" href="'+p.maps+'" target="_blank">📍 Open in Maps</a>':'')+'</div><button class="spc-rm" onclick="removePlace(\''+p.uid+'\')">✕</button></div>';
+  }).join('');
+}
+
+// Budget
+function saveBudget(){
+  var ids=['flights','accom','car','fuel','train','food','act','shop','misc'];
+  var vals={};ids.forEach(function(id){vals[id]=document.getElementById('ba-'+id).value||'0';});
+  sSet('budget',vals);calcTotal();
+}
+function calcTotal(){
+  var ids=['flights','accom','car','fuel','train','food','act','shop','misc'];
+  var total=0;ids.forEach(function(id){total+=parseFloat(document.getElementById('ba-'+id).value)||0;});
+  document.getElementById('ba-total').innerHTML='<strong>$'+total.toLocaleString()+'</strong>';
+}
+function loadBudget(){
+  var saved=sGet('budget')||{};
+  ['flights','accom','car','fuel','train','food','act','shop','misc'].forEach(function(id){if(saved[id])document.getElementById('ba-'+id).value=saved[id];});
+  calcTotal();
+  document.querySelectorAll('.budget-input').forEach(function(inp){inp.addEventListener('input',calcTotal);});
+}
+
+// Randomiser
+var FOODS=['🍜 Ichiran Ramen (Fukuoka)','🍣 Mawaru Kaiten Sushi','🥩 Miyazaki Wagyu Teppanyaki','🐷 Kurobuta Shabu-shabu','🍗 Chicken Nanban','🏮 Nakasu Yatai Food Stall','🍜 Tsukemen Dipping Noodles','🐴 Basashi Horse Sashimi','🍡 Jigoku-mushi Steam Egg &amp; Sweet Potato','☕ FUK Coffee + local wagashi sweets'];
+var ACTS=['🚣 Takachiho Gorge Rowboat','🔴 Jigoku Meguri 7 Hells','🐍 Lake Ikeda Giant Eels','⛩️ Kirishima Jingu at dusk','🤖 Gundam Statue at LaLaport','🏃 Ohori Park Lake Run','🏖️ Nichinan Coast Drive','🛁 Sand Bath at Takegawara','🎬 Apothecary Diaries Movie','🐴 Cape Toi Wild Horses'];
+function spinEat(){var r=FOODS[Math.floor(Math.random()*FOODS.length)];var el=document.getElementById('sr-eat');el.innerHTML='<div class="sr-icon">🎲</div><div class="sr-name">'+r+'</div><div class="sr-area">Tonight\'s pick!</div>';el.classList.add('show');}
+function spinDo(){var r=ACTS[Math.floor(Math.random()*ACTS.length)];var el=document.getElementById('sr-do');el.innerHTML='<div class="sr-icon">🎯</div><div class="sr-name">'+r+'</div><div class="sr-area">Let\'s go!</div>';el.classList.add('show');}
+
+// Init
+applyHidden();
+initDP();
+renderPlaces();
+loadBudget();
+</script>
+</body>
+</html>
